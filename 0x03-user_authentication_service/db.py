@@ -30,12 +30,12 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-    def add_user(email, hashed_pw):
+    def add_user(email="", hashed_pw=""):
         """
         Class method that adds a new user to
         the database
         """
-        new_user = User(email=email, hashed_password=hashed_pw)
+        new_user = User(email=email hashed_password=hashed_pw)
 
         Session.add(new_user)
         return new_user
