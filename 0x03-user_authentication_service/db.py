@@ -47,15 +47,8 @@ class DB:
         via a keyword identifier
         """
         try:
-            Key = []
-            Value = []
-            for key,value in kwargs.items():
-                Key.append(key)
-                Value.append(value)
-            user = self._session.query(User.Key[0]).\
-                    filter(User.Key[0]==Value[0]).first()
-            return user
-        except InvalidRequestError as e:
-            print(e)
-        except NoResultFound as e:
-            print(e)
+            return self._session.query(User).filter_by(**kwargs).first()
+        except NoResultFound:
+            raise NoResultFound("No user found with the specified criteria.")
+        except InvalidRequestError:
+            raise InvalidRequestError("Invalid query arguments.")
